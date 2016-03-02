@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SceneScript lower="0" upper="0">
+  <SceneObject lower="0" upper="131" language="en" identifier="Welcome">
+    <SceneTurn lower="18" upper="49" speaker="Anna">
+      <SceneUttr lower="24" upper="49" punct=".">
+        <ActionObject lower="24" upper="34" agentname="" name="WaveLeft">
+        </ActionObject>
+        <ActionObject lower="35" upper="40" agentname="" name="Nod">
+        </ActionObject>
+        <SceneWord lower="41" upper="48" text="Welcome"/>
+      </SceneUttr>
+    </SceneTurn><SceneTurn lower="50" upper="98" speaker="Anna">
+      <SceneUttr lower="56" upper="98" punct="!">
+        <SceneWord lower="56" upper="60" text="Nice"/>
+        <ActionObject lower="61" upper="68" agentname="" name="Smile">
+        </ActionObject>
+        <SceneWord lower="69" upper="71" text="to"/>
+        <SceneWord lower="72" upper="76" text="have"/>
+        <ActionObject lower="77" upper="88" agentname="Bob" name="Smile">
+        </ActionObject>
+        <SceneWord lower="89" upper="92" text="you"/>
+        <SceneWord lower="93" upper="97" text="here"/>
+      </SceneUttr>
+    </SceneTurn><SceneTurn lower="99" upper="131" speaker="Baxter">
+      <SceneUttr lower="107" upper="131" punct="!">
+        <SceneWord lower="107" upper="109" text="Hi"/>
+        <SceneWord lower="110" upper="115" text="there"/>
+        <ActionObject lower="116" upper="126" agentname="" name="WaveLeft">
+        </ActionObject>
+        <SceneWord lower="127" upper="130" text="too"/>
+      </SceneUttr>
+    </SceneTurn>
+  </SceneObject>
+  <SceneObject lower="133" upper="347" language="en" identifier="ByeBye">
+    <SceneTurn lower="150" upper="214" speaker="Anna">
+      <SceneUttr lower="156" upper="161" punct=",">
+        <SceneWord lower="156" upper="160" text="Well"/>
+      </SceneUttr>
+      <SceneUttr lower="162" upper="214" punct=".">
+        <SceneWord lower="162" upper="167" text="there"/>
+        <SceneWord lower="168" upper="170" text="is"/>
+        <SceneWord lower="171" upper="172" text="a"/>
+        <ActionObject lower="173" upper="183" agentname="" name="TiltLeft">
+        </ActionObject>
+        <SceneWord lower="184" upper="193" text="beginning"/>
+        <SceneWord lower="194" upper="197" text="and"/>
+        <SceneWord lower="198" upper="203" text="there"/>
+        <SceneWord lower="204" upper="206" text="is"/>
+        <SceneWord lower="207" upper="209" text="an"/>
+        <SceneWord lower="210" upper="213" text="end"/>
+      </SceneUttr>
+    </SceneTurn><SceneTurn lower="215" upper="261" speaker="Anna">
+      <SceneUttr lower="221" upper="225" punct=",">
+        <SceneWord lower="221" upper="224" text="Now"/>
+      </SceneUttr>
+      <SceneUttr lower="226" upper="261" punct=".">
+        <SceneWord lower="226" upper="228" text="it"/>
+        <SceneWord lower="229" upper="231" text="is"/>
+        <ActionObject lower="232" upper="237" agentname="" name="Sad">
+        </ActionObject>
+        <SceneWord lower="238" upper="241" text="the"/>
+        <SceneWord lower="242" upper="245" text="end"/>
+        <ActionObject lower="246" upper="260" agentname="" name="TiltLeftBack">
+        </ActionObject>
+      </SceneUttr>
+    </SceneTurn><SceneTurn lower="262" upper="321" speaker="Bob">
+      <SceneUttr lower="267" upper="321" punct="!">
+        <SceneWord lower="267" upper="270" text="Bye"/>
+        <ActionObject lower="271" upper="281" agentname="" name="WaveLeft">
+        </ActionObject>
+        <ActionObject lower="282" upper="297" agentname="Anna" name="WaveLeft">
+        </ActionObject>
+        <ActionObject lower="298" upper="316" agentname="Valerie" name="WaveLeft">
+        </ActionObject>
+        <SceneWord lower="317" upper="320" text="bye"/>
+      </SceneUttr>
+    </SceneTurn><SceneTurn lower="322" upper="347" speaker="Valerie">
+      <SceneUttr lower="331" upper="347" punct="!">
+        <SceneWord lower="331" upper="334" text="Bye"/>
+        <SceneWord lower="335" upper="338" text="bye"/>
+        <ActionObject lower="339" upper="346" agentname="" name="Smile">
+        </ActionObject>
+      </SceneUttr>
+    </SceneTurn>
+  </SceneObject>
+</SceneScript>
