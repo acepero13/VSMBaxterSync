@@ -31,8 +31,8 @@ public class BaxterAction extends Action implements AnimationListener {
     int mDuration;
     Object mParameter;
     boolean mBlocking;
+    BufferedImage head;
     ClientConnectionHandler connection ;
-    private final static Stickman mBaxterStickman = new Stickman("", (Math.random() > 0.5) ? Stickman.TYPE.FEMALE : Stickman.TYPE.MALE, 1.5f);
 
     public BaxterAction(int starttime, String name, int dur, Object param, boolean block){
         mParameter = param;
@@ -40,6 +40,18 @@ public class BaxterAction extends Action implements AnimationListener {
         mStartTime = starttime;
         mName = name;
         mDuration = dur;
+        Stickman mBaxterStickman = new Stickman("Baxter", (Math.random() > 0.5) ? Stickman.TYPE.FEMALE : Stickman.TYPE.MALE, 2.0f);
+        mBaxterStickman.setApplyTransform(false);
+        mBaxterStickman.doAnimation(mName, 500, false);
+
+        BufferedImage image = new BufferedImage(
+                640,
+                480,
+                BufferedImage.TYPE_INT_RGB
+        );
+        mBaxterStickman.paint( image.getGraphics() );
+        head = cropHead(image, (int)mBaxterStickman.mHead.getWidth(), (int)mBaxterStickman.mHead.getHeight(), 2.0f);
+        mBaxterStickman.setApplyTransform(true);
 
 
     }
@@ -53,28 +65,21 @@ public class BaxterAction extends Action implements AnimationListener {
 
 
 
-    private BufferedImage cropHead(BufferedImage src){
-        BufferedImage dest = src.getSubimage(0, 0, mBaxterStickman.mHead.getWidth() * (int) mBaxterStickman.mScale +70, mBaxterStickman.mHead.getHeight() * (int) mBaxterStickman.mScale -50);
+    private BufferedImage cropHead(BufferedImage src, int width, int height, float scale ){
+        BufferedImage dest = src.getSubimage(0, 0, width * (int) scale +70, height * (int) scale -50);
         return dest;
     }
 
     @Override
     public void run() {
         notifyListenersAboutAction(this, ActionListener.STATE.ACTION_STARTED);
-        mBaxterStickman.mScale = 2.0f;
-        mBaxterStickman.doAnimation(mName, 500, false);
 
          Dimension screenDimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        BufferedImage image = new BufferedImage(
-                640,
-                480,
-                BufferedImage.TYPE_INT_RGB
-        );
+
         // call the Component's paint method, using
         // the Graphics object of the image.
 
-        mBaxterStickman.paint( image.getGraphics() );
-        BufferedImage head = cropHead(image);
+
         ArrayList<String> params = new ArrayList<>();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
@@ -90,16 +95,6 @@ public class BaxterAction extends Action implements AnimationListener {
             e.printStackTrace();
         }
 
-       /* try {
-            FileOutputStream fos = new FileOutputStream (new File("img.png"));
-            // Put data in your baos
-            baos.writeTo(fos);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
         BaxterCommand command = new BaxterCommand("paint", "testId", params);
 
         TCPActionServer.getInstance().addListener(this);
@@ -107,7 +102,7 @@ public class BaxterAction extends Action implements AnimationListener {
         IOSIndentWriter iosw = new IOSIndentWriter(out);
         boolean r = XMLUtilities.writeToXMLWriter(command, iosw);
         String toSend = new String(out.toByteArray());
-        toSend+= "#END";
+        toSend+= "#END\n";
         System.out.println(toSend);
         ClientConnectionHandler.getInstance().sendToServer(toSend);
         try {

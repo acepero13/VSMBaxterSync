@@ -2,4 +2,5 @@ tmp/
 log/
 bld/
 nbproject/
+.idea/
 src/de/dfki/vsm/sfsl/parser/

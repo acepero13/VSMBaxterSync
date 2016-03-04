@@ -18,6 +18,7 @@ public class ClientConnectionHandler extends ClientConnectionPlayerHandler {
 
     public ClientConnectionHandler() {
         super();
+        mHost = "192.168.178.86";
         mPort = 1313;
         sIDENTIFIER = "Baxter";
 
@@ -48,6 +49,8 @@ public class ClientConnectionHandler extends ClientConnectionPlayerHandler {
         while (mRunning) {
             try {
                 inputLine = mIn.readLine();
+                System.out.println(inputLine);
+
                 //TODO: Do something
             } catch (IOException ex) {
                 mLogger.severe(mHost + " i/o exception - aborting!");

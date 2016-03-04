@@ -66,7 +66,6 @@ public class ServerConnectionHandler extends Thread {
 		while (mRunning) {
 			try {
 				input = mIn.readLine();
-				System.out.println("READ");
 				System.out.println(input);
 				if (input != null) {
 					input = input.trim();

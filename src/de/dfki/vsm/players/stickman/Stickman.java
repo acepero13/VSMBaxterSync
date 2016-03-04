@@ -74,6 +74,7 @@ public class Stickman extends JComponent {
 	public float mScale = 1.0f;
 	public float mGeneralXTranslation = 0;
 	public float mGeneralYTranslation = 0;
+	public static boolean mApplyTransform = true;
 
 	public static Dimension mSize = new Dimension(400, 600);
 	FontMetrics mFontMetrics;
@@ -233,6 +234,14 @@ public class Stickman extends JComponent {
 		return doAnimation(name, duration, "", block);
 	}
 
+	public void setApplyTransform(boolean apply){
+		mApplyTransform = apply;
+	}
+
+	public void setSclae(float scale){
+		mScale = scale;
+	}
+
 	public Animation doAnimation(String name, Object param, boolean block) {
 		return doAnimation(name, -1, param, block);
 	}
@@ -295,6 +304,12 @@ public class Stickman extends JComponent {
 		AffineTransform at = g2.getTransform();
 		mGeneralXTranslation = 0;
 		mGeneralYTranslation = 0;
+		if(mApplyTransform){
+			mGeneralXTranslation = mSize.width / 2 - mHead.mSize.width * mScale;
+			mGeneralYTranslation = getBounds().height - 470 * mScale;
+		}
+
+
 		at.translate(mGeneralXTranslation, mGeneralYTranslation);
 		at.scale(mScale, mScale);
 		g2.setTransform(at);
