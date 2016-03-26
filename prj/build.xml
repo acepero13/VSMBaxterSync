@@ -158,7 +158,7 @@
 
         <java classname="de.dfki.vsm.SceneMaker3" fork="true">
             <!-- <arg line="runtime res/prj/test"/>-->
-            <arg line="editor res/prj/test"/>
+            <arg line="editor /home/alvaro/Documents/Universitat/Projects/BaxterExample"/>
             <jvmarg line="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005" />
             <classpath refid="clspath"/>
         </java>

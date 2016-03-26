@@ -10,6 +10,7 @@ import de.dfki.vsm.players.baxter.client.ClientConnectionHandler;
 import de.dfki.vsm.players.baxter.command.BaxterCommand;
 import de.dfki.vsm.players.server.TCPActionServer;
 import de.dfki.vsm.players.stickman.Stickman;
+import de.dfki.vsm.players.stickman.animationlogic.AnimationLoader;
 import de.dfki.vsm.players.stickman.animationlogic.listener.AnimationListener;
 import de.dfki.vsm.util.ios.IOSIndentWriter;
 import de.dfki.vsm.util.xml.XMLUtilities;
@@ -42,6 +43,7 @@ public class BaxterAction extends Action implements AnimationListener {
         mDuration = dur;
         Stickman mBaxterStickman = new Stickman("Baxter", (Math.random() > 0.5) ? Stickman.TYPE.FEMALE : Stickman.TYPE.MALE, 2.0f);
         mBaxterStickman.setApplyTransform(false);
+        AnimationLoader.getInstance().loadAnimation(mBaxterStickman, "Mouth_O", 201, mBlocking);
         mBaxterStickman.doAnimation(mName, 500, false);
 
         BufferedImage image = new BufferedImage(

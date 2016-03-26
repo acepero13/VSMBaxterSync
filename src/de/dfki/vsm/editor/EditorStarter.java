@@ -62,6 +62,7 @@ public class EditorStarter extends JPanel
     private final Box mLeftProjectBox;//Recent Projects
     private final Box mRightProjectBox;
     private JFrame mParentFrame;
+    public int count = 200;
 
     // The singelton logger instance
     private final LOGDefaultLogger mLogger = LOGDefaultLogger.getInstance();
@@ -212,15 +213,25 @@ public class EditorStarter extends JPanel
             {
                 if (mWelcomeStickman.mHead.getBounds().contains(evt.getX(), evt.getY()))
                 {
+
                     mWelcomeStickman.doAnimation("Speaking", 500, "My head!", false);
                     mWelcomeStickman.doAnimation("Blink", 100, false);
-                    mWelcomeStickman.doAnimation("Mouth_O", 40, true);
+                    mWelcomeStickman.doAnimation("Mouth_O", count, true);
                     mWelcomeStickman.doAnimation("Mouth_Default", 20, true);
+                    count = count +1;
+                    if(count >= 211){
+                        count =200;
+                    }
                 }
                 else
                 {
                     mWelcomeStickman.doAnimation("Blink", 100, false);
                     mWelcomeStickman.doAnimation("Smile", 500, false);
+                    mWelcomeStickman.doAnimation("Mouth_O", count, true);
+                    count = count +1;
+                    if(count >= 211){
+                        count =200;
+                    }
                 }
             }
         });

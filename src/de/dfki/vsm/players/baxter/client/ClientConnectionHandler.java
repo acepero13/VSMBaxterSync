@@ -18,7 +18,7 @@ public class ClientConnectionHandler extends ClientConnectionPlayerHandler {
 
     public ClientConnectionHandler() {
         super();
-        mHost = "192.168.178.86";
+        mHost = "127.0.0.1";
         mPort = 1313;
         sIDENTIFIER = "Baxter";
 

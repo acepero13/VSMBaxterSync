@@ -266,9 +266,13 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                                 // Create and add the master event action that controlas all other actions
                                 mActionPlayer.addMasterEventAction(new StickmanEventAction(StickmanStage.getStickman(speaker), 0, "Speaking", 3000, wts, false));
                                 // add mouth open
-                                mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 200, "", true));
+                                mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 201, "", true));
+
+                                mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 203, "", true));
+
+                                mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 202, "", true));
                                 // add mounth closed
-                                mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 190, "Mouth_Default", 20, "", false));
+                               mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 190, "Mouth_Default", 20, "", false));
                             }
                         }
 
@@ -282,14 +286,12 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                                 wts.add(new Word(w));
                                 // generate a new time mark after each word
                                 tm = mActionPlayer.getTimeMark();
-
                                 wordCount = w.length();
                             } else if (word instanceof SceneParam) {
                                 // Visualization
                                 //mLogger.message("Executing param:" + ((SceneParam) word).getText());
                             } else if (word instanceof ActionObject) {
                                 ActionObject ao = ((ActionObject) word);
-
                                 String agent = ao.getAgentName();
                                 agent = (agent == null || agent.trim().isEmpty()) ? speaker : agent;
 
