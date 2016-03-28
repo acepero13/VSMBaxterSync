@@ -5,6 +5,7 @@ import de.dfki.vsm.editor.event.TurnExecutedEvent;
 import de.dfki.vsm.editor.event.UtteranceExecutedEvent;
 import de.dfki.vsm.model.project.AgentConfig;
 import de.dfki.vsm.model.project.PlayerConfig;
+import de.dfki.vsm.players.action.TtsAction;
 import de.dfki.vsm.players.baxter.action.BaxterAction;
 import de.dfki.vsm.players.stickman.StickmanStage;
 import de.dfki.vsm.runtime.project.RunTimeProject;
@@ -231,6 +232,7 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
             @Override
             public void run() {
                 // Select The Scene
+
                 final SceneScript script = mProject.getSceneScript();
                 final SceneGroup group = script.getSceneGroup(name);
                 final SceneObject scene = group.select();
@@ -240,6 +242,7 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                 // Process The Turns
                 for (SceneTurn turn : scene.getTurnList()) {
                     // Turn Visualization
+                    TtsAction va  = new TtsAction();
                     mLogger.message("Executing turn:" + turn.getText());
                     EventDispatcher.getInstance().convey(new TurnExecutedEvent(this, turn));
 
@@ -264,7 +267,7 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                         if (!(utt.getCleanText().length() == 0) && !utt.getCleanText().equalsIgnoreCase(utt.getPunct())) {
                             if (mRelationAgentPlayer.get(speaker).equalsIgnoreCase("stickmanstage")) {
                                 // Create and add the master event action that controlas all other actions
-                                mActionPlayer.addMasterEventAction(new StickmanEventAction(StickmanStage.getStickman(speaker), 0, "Speaking", 3000, wts, false));
+                                /*mActionPlayer.addMasterEventAction(new StickmanEventAction(StickmanStage.getStickman(speaker), 0, "Speaking", 3000, wts, false));
                                 // add mouth open
                                 mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 201, "", true));
 
@@ -272,7 +275,7 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
 
                                 mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 202, "", true));
                                 // add mounth closed
-                               mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 190, "Mouth_Default", 20, "", false));
+                               mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 190, "Mouth_Default", 20, "", false));*/
                             }
                         }
 
@@ -287,6 +290,8 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                                 // generate a new time mark after each word
                                 tm = mActionPlayer.getTimeMark();
                                 wordCount = w.length();
+                                va.addWord(word);
+
                             } else if (word instanceof SceneParam) {
                                 // Visualization
                                 //mLogger.message("Executing param:" + ((SceneParam) word).getText());
@@ -331,7 +336,7 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                                 //mLogger.message("Executing abbreviation:" + ((SceneAbbrev) word).getText());
                             }
                         }
-
+                        mActionPlayer.addAction(va);
                         // play all actions of an utterance
                         //mLogger.message("go ...........");
                         mActionPlayer.play();

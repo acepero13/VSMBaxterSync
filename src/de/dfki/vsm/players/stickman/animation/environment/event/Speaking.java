@@ -32,7 +32,6 @@ public class Speaking extends EventAnimation {
 		if (mParameter instanceof WordTimeMarkSequence) {
 			mWTS = (WordTimeMarkSequence) mParameter;
 		}
-
 		mAnimationPart = new ArrayList<>();
 		mAnimationPart.add(new AnimationContent(mStickman.mSpeechBubble, "shape", SpeechBubble.SHAPE.SPEAK.name(), mWTS));
 
