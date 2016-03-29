@@ -35,8 +35,6 @@ public class TtsAction extends Action implements EventListener{
 
     public void run(){
 
-
-
         Iterator it = listWords.iterator();
         VoiceName speakerVoice = I4GMaryClient.OBADIAH;
         while (it.hasNext()) {

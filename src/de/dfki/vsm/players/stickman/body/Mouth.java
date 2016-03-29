@@ -16,7 +16,7 @@ public class Mouth extends BodyPart {
 
 	public static enum SHAPE {
 
-		DEFAULT, SMILE, SAD, O, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE
+		DEFAULT, SMILE, SAD, O, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, ELEVEN, TWELVE, THIRTEEN, FOURTEEN,NINETEEN, TWENTY
 	};
 
 	Head mHead;
@@ -82,6 +82,8 @@ public class Mouth extends BodyPart {
 
 			case ONE:
 			case SIX:
+			case FOURTEEN:
+			case NINETEEN:
 				gp.moveTo(mStart.x - mLength / 2, mStart.y);
 				gp.quadTo(mStart.x, mStart.y - mLength / 5, mEnd.x, mStart.y);
 				gp.quadTo(mStart.x, mStart.y + mLength / 5, mStart.x - mLength / 2, mStart.y);
@@ -95,6 +97,7 @@ public class Mouth extends BodyPart {
 
 
 			case THREE:
+			case TWENTY:
 				gp.moveTo(mStart.x - mLength / 2.8, mStart.y);
 				gp.quadTo(mStart.x, mStart.y - mLength / 2.5, mEnd.x - mLength / 6, mStart.y);
 				gp.quadTo(mStart.x, mStart.y + mLength / 2.5, mStart.x - mLength / 2.8, mStart.y);

@@ -30,6 +30,7 @@ public class StickmanAction extends Action implements AnimationListener {
 	boolean mBlocking;
 	public Animation mAnimation;
 
+
 	public StickmanAction(Stickman stickman, int starttime, String name, int dur, Object param, boolean block) {
 		Thread.currentThread().setName("Stickman action " + name);
 		mStickman = stickman;
@@ -52,6 +53,8 @@ public class StickmanAction extends Action implements AnimationListener {
 
 		}
 	}
+
+
 	
 	@Override
 	public void update(String animationId) {

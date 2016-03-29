@@ -6,8 +6,10 @@ import de.dfki.vsm.editor.event.UtteranceExecutedEvent;
 import de.dfki.vsm.model.project.AgentConfig;
 import de.dfki.vsm.model.project.PlayerConfig;
 import de.dfki.vsm.players.action.TtsAction;
+import de.dfki.vsm.players.action.sequence.Phoneme;
 import de.dfki.vsm.players.baxter.action.BaxterAction;
 import de.dfki.vsm.players.stickman.StickmanStage;
+import de.dfki.vsm.players.stickman.animation.face.Speak;
 import de.dfki.vsm.runtime.project.RunTimeProject;
 import de.dfki.vsm.model.scenescript.AbstractWord;
 import de.dfki.vsm.model.scenescript.ActionFeature;
@@ -37,6 +39,9 @@ import de.dfki.vsm.runtime.values.StringValue;
 import de.dfki.vsm.runtime.values.StructValue;
 import de.dfki.vsm.util.evt.EventDispatcher;
 import de.dfki.vsm.util.log.LOGDefaultLogger;
+import de.dfki.vsm.util.tts.I4GMaryClient;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -232,7 +237,7 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
             @Override
             public void run() {
                 // Select The Scene
-
+                I4GMaryClient mary = I4GMaryClient.instance();
                 final SceneScript script = mProject.getSceneScript();
                 final SceneGroup group = script.getSceneGroup(name);
                 final SceneObject scene = group.select();
@@ -267,30 +272,58 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                         if (!(utt.getCleanText().length() == 0) && !utt.getCleanText().equalsIgnoreCase(utt.getPunct())) {
                             if (mRelationAgentPlayer.get(speaker).equalsIgnoreCase("stickmanstage")) {
                                 // Create and add the master event action that controlas all other actions
-                                /*mActionPlayer.addMasterEventAction(new StickmanEventAction(StickmanStage.getStickman(speaker), 0, "Speaking", 3000, wts, false));
+                                mActionPlayer.addMasterEventAction(new StickmanEventAction(StickmanStage.getStickman(speaker), 0, "Speaking", 3000, wts, false));
                                 // add mouth open
-                                mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 201, "", true));
+                               // mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 201, "", true));
 
-                                mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 203, "", true));
+                               // mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 203, "", true));
 
-                                mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 202, "", true));
+                               // mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 0, "Mouth_O", 202, "", true));
                                 // add mounth closed
-                               mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 190, "Mouth_Default", 20, "", false));*/
+                              // mActionPlayer.addAction(new StickmanAction(StickmanStage.getStickman(speaker), 190, "Mouth_Default", 20, "", false));
                             }
                         }
 
                         // Process the words of this utterance
                         // remember timemark
                         String tm = mActionPlayer.getTimeMark();
+                        LinkedList<Phoneme> phonemes = new LinkedList<>();
+                        int index = 0;
+
+                        try {
+                            phonemes = mary.getWordPhonemeList(utt.getCleanText());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         for (AbstractWord word : utt.getWordList()) {
                             if (word instanceof SceneWord) {
+                                String phonetics = "";
+                                long wordDuration = 0;
+
                                 String w = ((SceneWord) word).getText();
                                 // add word to the word time mark sequence
                                 wts.add(new Word(w));
                                 // generate a new time mark after each word
-                                tm = mActionPlayer.getTimeMark();
                                 wordCount = w.length();
+                                try {
+                                    wordDuration = mary.getWordDuration(w);
+                                    LinkedList<Phoneme> phonemes2 = mary.getWordPhonemeList(w);
+                                    int i = 0;
+                                    for(; i< phonemes2.size(); i++){
+                                        if(!speaker.equals("Baxter")) {//TODO: Quitar luego
+                                            Phoneme p = phonemes.get(index + i);
+                                            StickmanAction phonemeSA = new StickmanAction(StickmanStage.getStickman(speaker), (int) p.getmStart(), "Mouth_" + p.getLipPosition(), (int) (p.getmEnd() - p.getmStart()), p.getLipPosition(), true);
+                                            mActionPlayer.addAction(phonemeSA);
+
+                                        }
+                                    }
+                                    index += i;
+
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                                 va.addWord(word);
+                                tm = mActionPlayer.getTimeMark();
 
                             } else if (word instanceof SceneParam) {
                                 // Visualization
