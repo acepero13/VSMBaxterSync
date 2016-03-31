@@ -33,6 +33,7 @@ public class BaxterAction extends Action implements AnimationListener {
     Object mParameter;
     boolean mBlocking;
     BufferedImage head;
+    String mAnimationAction;
     ClientConnectionHandler connection ;
 
     public BaxterAction(int starttime, String name, int dur, Object param, boolean block){
@@ -41,9 +42,9 @@ public class BaxterAction extends Action implements AnimationListener {
         mStartTime = starttime;
         mName = name;
         mDuration = dur;
-        Stickman mBaxterStickman = new Stickman("Baxter", (Math.random() > 0.5) ? Stickman.TYPE.FEMALE : Stickman.TYPE.MALE, 2.0f);
+        Stickman mBaxterStickman = new Stickman("Baxter", Stickman.TYPE.MALE, 2.0f);
         mBaxterStickman.setApplyTransform(false);
-        AnimationLoader.getInstance().loadAnimation(mBaxterStickman, "Mouth_O", 201, mBlocking);
+        AnimationLoader.getInstance().loadAnimation(mBaxterStickman, mName, dur, mBlocking);
         mBaxterStickman.doAnimation(mName, 500, false);
 
         BufferedImage image = new BufferedImage(

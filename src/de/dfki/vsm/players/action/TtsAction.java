@@ -68,6 +68,5 @@ public class TtsAction extends Action implements EventListener{
         if(event instanceof LineStop){
             mActionPlayer.actionEnded(this);
         }
-        System.out.println("Evento: " + event.toString());
     }
 }

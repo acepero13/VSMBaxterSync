@@ -269,7 +269,7 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                         // create a new word time mark sequence based on the current utterance
                         WordTimeMarkSequence wts = new WordTimeMarkSequence(utt.getCleanText());
 
-                        if (!(utt.getCleanText().length() == 0) && !utt.getCleanText().equalsIgnoreCase(utt.getPunct())) {
+                        if (!(utt.getCleanText().length() == 0) && !utt.getCleanText().equalsIgnoreCase(utt.getPunct()) || ( speaker!= null && speaker.equals("Baxter"))) {
                             if (mRelationAgentPlayer.get(speaker).equalsIgnoreCase("stickmanstage")) {
                                 // Create and add the master event action that controlas all other actions
                                 mActionPlayer.addMasterEventAction(new StickmanEventAction(StickmanStage.getStickman(speaker), 0, "Speaking", 3000, wts, false));
@@ -310,11 +310,15 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                                     LinkedList<Phoneme> phonemes2 = mary.getWordPhonemeList(w);
                                     int i = 0;
                                     for(; i< phonemes2.size(); i++){
-                                        if(!speaker.equals("Baxter")) {//TODO: Quitar luego
+                                       if(!speaker.equals("Baxter")) {//TODO: Quitar luego
                                             Phoneme p = phonemes.get(index + i);
                                             StickmanAction phonemeSA = new StickmanAction(StickmanStage.getStickman(speaker), (int) p.getmStart(), "Mouth_" + p.getLipPosition(), (int) (p.getmEnd() - p.getmStart()), p.getLipPosition(), true);
                                             mActionPlayer.addAction(phonemeSA);
-
+                                        }
+                                        else {//TODO: Quitar luego
+                                            Phoneme p = phonemes.get(index + i);
+                                            BaxterAction phonemeBA = new BaxterAction((int) p.getmStart(), "Mouth_" + p.getLipPosition(), (int) (p.getmEnd() - p.getmStart()), p.getLipPosition(), true);
+                                            mActionPlayer.addAction(phonemeBA);
                                         }
                                     }
                                     index += i;
