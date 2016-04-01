@@ -29,6 +29,7 @@ import de.dfki.vsm.players.action.EventAction;
 import de.dfki.vsm.players.action.sequence.TimeMark;
 import de.dfki.vsm.players.action.sequence.Word;
 import de.dfki.vsm.players.action.sequence.WordTimeMarkSequence;
+import de.dfki.vsm.players.baxter.client.BaxterClientConnectionHandler;
 import de.dfki.vsm.players.stickman.action.StickmanAction;
 import de.dfki.vsm.players.stickman.action.StickmanEventAction;
 import de.dfki.vsm.runtime.interpreter.Process;
@@ -163,6 +164,7 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
         StickmanStage.clearStage();
         // remove action player
         mActionPlayer.removeListener(this);
+        //BaxterClientConnectionHandler.getInstance().end();
         // stop the ActionPlayer
         mActionPlayer.end();
         // do not wait for the end of any actions

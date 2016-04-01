@@ -459,7 +459,7 @@ public final class OLDSceneScriptEditor extends JPanel implements DocumentListen
             // various editor subcomponents
             EditorInstance.getInstance().refresh();
             // Print some information
-            mLogger.message("Updating editor after successful parsing the scenescript document");
+//            mLogger.message("Updating editor after successful parsing the scenescript document");
             // Return true at success
             return true;
         } catch (final BadLocationException exc) {

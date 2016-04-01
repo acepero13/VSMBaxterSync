@@ -432,11 +432,11 @@ public class EditorConfig {
         init();
 
         // Print an information message if this case
-        mLogger.message("Loaded project editor configuration file in path'" + path+ "':\n");
+//        mLogger.message("Loaded project editor configuration file in path'" + path+ "':\n");
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         if (XMLUtilities.writeToXMLStream(sPROPERTIES, stream)) {
             try {
-                mLogger.message(stream.toString("UTF-8"));
+//                mLogger.message(stream.toString("UTF-8"));
             } catch (Exception exc) {
                 mLogger.failure(exc.toString());
             }

@@ -18,9 +18,11 @@ import java.net.UnknownHostException;
  *
  */
 public class ClientConnectionHandler extends ClientConnectionPlayerHandler {
-	private static String sIDENTIFIER = "StickmanStage";
+	//private static String sIDENTIFIER = "StickmanStage";
 	public ClientConnectionHandler() {
 		super();
+		sIDENTIFIER = "StickmanStage";
+
 	}
 
 	public void connect() {

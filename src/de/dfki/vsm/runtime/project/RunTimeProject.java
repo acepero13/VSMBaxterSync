@@ -58,7 +58,7 @@ public class RunTimeProject {
     // Construct an empty runtime project
     public RunTimeProject() {
         // Print some information
-        mLogger.message("Creating a new empty runtime project");
+//        mLogger.message("Creating a new empty runtime project");
     }
 
     // Construct a project from a directory
@@ -303,7 +303,7 @@ public class RunTimeProject {
         }
 
         // Print an information message in this case
-        mLogger.message("Loaded project configuration file in path'" + path + "':\n" + mProjectConfig);
+//        mLogger.message("Loaded project configuration file in path'" + path + "':\n" + mProjectConfig);
         // Return success if the project was loaded
         return true;
     }
@@ -375,7 +375,7 @@ public class RunTimeProject {
         mSceneFlow.establishTargetNodes();
         mSceneFlow.establishAltStartNodes();
         // Print an information message in this case
-        mLogger.message("Loaded sceneflow configuration file in path '" + path + "':\n" + mSceneFlow);
+//        mLogger.message("Loaded sceneflow configuration file in path '" + path + "':\n" + mSceneFlow);
         // Return success if the project was loaded
         return true;
 
@@ -444,7 +444,7 @@ public class RunTimeProject {
         }
 
         // Print an information message in this case
-        mLogger.message("Loaded scenescript configuration file in path'" + path + "':\n" + mSceneScript);
+//        mLogger.message("Loaded scenescript configuration file in path'" + path + "':\n" + mSceneScript);
         // Return success if the project was loaded
         return true;
     }
@@ -515,7 +515,7 @@ public class RunTimeProject {
         }
 
         // Print an information message in this case
-        mLogger.message("Loaded acticon configuration file in path'" + path + "':\n" + mActiconConfig);
+//        mLogger.message("Loaded acticon configuration file in path'" + path + "':\n" + mActiconConfig);
         // Return success if the project was loaded
         return true;
     }
@@ -586,7 +586,7 @@ public class RunTimeProject {
         }
 
         // Print an information message in this case
-        mLogger.message("Loaded gesticon configuration file in path'" + path + "':\n" + mGesticonConfig);
+//        mLogger.message("Loaded gesticon configuration file in path'" + path + "':\n" + mGesticonConfig);
         // Return success if the project was loaded
         return true;
     }
@@ -655,7 +655,7 @@ public class RunTimeProject {
         }
 
         // Print an information message in this case
-        mLogger.message("Loaded visicon configuration file in path'" + path + "':\n" + mVisiconConfig);
+//        mLogger.message("Loaded visicon configuration file in path'" + path + "':\n" + mVisiconConfig);
         // Return success if the project was loaded
         return true;
     }

@@ -408,7 +408,7 @@ public final class EditorInstance extends JFrame implements EventListener, Chang
                 // Show the menu bar items
                 mEditorMenuBar.setVisible(true);
                 //
-                mLogger.message("Switching content pane to project editors");
+//                mLogger.message("Switching content pane to project editors");
             } else {
                 //
                 mLogger.message("Already showing project editors in content pane");
@@ -741,7 +741,7 @@ public final class EditorInstance extends JFrame implements EventListener, Chang
         final String projectPath = project.getProjectPath();
         final String projectName = project.getProjectName();
         // Print some info message
-        mLogger.message("Updating recent projects with '" + projectPath + "' '" + projectName + "'");
+//        mLogger.message("Updating recent projects with '" + projectPath + "' '" + projectName + "'");
         //
         ArrayList<String> recentProjectPaths = new ArrayList<>();
         ArrayList<String> recentProjectNames = new ArrayList<>();

@@ -1,12 +1,8 @@
 package de.dfki.vsm.players.baxter.action;
 
-import de.dfki.vsm.Preferences;
-import de.dfki.vsm.api.VSMAgentClient;
-import de.dfki.vsm.api.VSMTCPSockClient;
-import de.dfki.vsm.players.ActionPlayer;
 import de.dfki.vsm.players.action.Action;
 import de.dfki.vsm.players.action.ActionListener;
-import de.dfki.vsm.players.baxter.client.ClientConnectionHandler;
+import de.dfki.vsm.players.baxter.client.BaxterClientConnectionHandler;
 import de.dfki.vsm.players.baxter.command.BaxterCommand;
 import de.dfki.vsm.players.server.TCPActionServer;
 import de.dfki.vsm.players.stickman.Stickman;
@@ -19,7 +15,6 @@ import sun.misc.BASE64Encoder;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -34,7 +29,7 @@ public class BaxterAction extends Action implements AnimationListener {
     boolean mBlocking;
     BufferedImage head;
     String mAnimationAction;
-    ClientConnectionHandler connection ;
+    BaxterClientConnectionHandler connection ;
 
     public BaxterAction(int starttime, String name, int dur, Object param, boolean block){
         mParameter = param;
@@ -106,8 +101,7 @@ public class BaxterAction extends Action implements AnimationListener {
         boolean r = XMLUtilities.writeToXMLWriter(command, iosw);
         String toSend = new String(out.toByteArray());
         toSend+= "#END\n";
-        System.out.println(toSend);
-        ClientConnectionHandler.getInstance().sendToServer(toSend);
+        BaxterClientConnectionHandler.getInstance().sendToServer(toSend);
         try {
             mActionEndSync.acquire();
         } catch (InterruptedException e) {
@@ -116,5 +110,6 @@ public class BaxterAction extends Action implements AnimationListener {
         System.out.println("SENT!");
         TCPActionServer.getInstance().removeListener(this);
         mActionPlayer.actionEnded(this);
+        mActionEndSync.release();
     }
 }

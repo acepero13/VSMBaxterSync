@@ -1,9 +1,6 @@
 package de.dfki.vsm.players.baxter.client;
 
-import de.dfki.vsm.api.VSMScenePlayer;
-import de.dfki.vsm.api.VSMTCPSockClient;
 import de.dfki.vsm.players.client.ClientConnectionPlayerHandler;
-import de.dfki.vsm.players.stickman.StickmanStage;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -12,11 +9,11 @@ import java.util.logging.Logger;
 /**
  * Created by alvaro on 2/21/16.
  */
-public class ClientConnectionHandler extends ClientConnectionPlayerHandler {
+public class BaxterClientConnectionHandler extends ClientConnectionPlayerHandler {
     public static final Logger mLogger = Logger.getAnonymousLogger();
-    private static ClientConnectionHandler sInstance = null;
+    private static BaxterClientConnectionHandler sInstance = null;
 
-    public ClientConnectionHandler() {
+    public BaxterClientConnectionHandler() {
         super();
         mHost = "127.0.0.1";
         mPort = 1313;
@@ -24,9 +21,9 @@ public class ClientConnectionHandler extends ClientConnectionPlayerHandler {
 
     }
 
-    public static ClientConnectionHandler getInstance(){
+    public static BaxterClientConnectionHandler getInstance(){
         if(sInstance == null){
-            sInstance =  new ClientConnectionHandler();
+            sInstance =  new BaxterClientConnectionHandler();
             sInstance.connect();
         }
         return sInstance;
