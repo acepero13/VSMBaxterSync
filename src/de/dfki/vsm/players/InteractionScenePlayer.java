@@ -8,6 +8,7 @@ import de.dfki.vsm.model.project.PlayerConfig;
 import de.dfki.vsm.players.action.TtsAction;
 import de.dfki.vsm.players.action.sequence.Phoneme;
 import de.dfki.vsm.players.baxter.action.BaxterAction;
+import de.dfki.vsm.players.stickman.Stickman;
 import de.dfki.vsm.players.stickman.StickmanStage;
 import de.dfki.vsm.players.stickman.animation.face.Speak;
 import de.dfki.vsm.runtime.project.RunTimeProject;
@@ -256,8 +257,17 @@ public final class InteractionScenePlayer implements RunTimePlayer, ActionListen
                     // Get The Turn Speaker
                     final String speaker = turn.getSpeaker();
 
-                    if (speaker == null) {
+                    if (speaker == null && mRelationAgentPlayer.get(speaker) != null) {
                         // Get The Default Speaker
+                    }
+                    else{
+                        if( mRelationAgentPlayer.get(speaker).equalsIgnoreCase("stickmanstage")){
+                            String gender = StickmanStage.getStickman(speaker).mType.name();
+                            va.setGender(gender);
+                        }
+                        else if (speaker.equalsIgnoreCase("baxter")){
+                            va.setGender(Stickman.TYPE.MALE.name());
+                        }
                     }
 
                     // Count The Word Number

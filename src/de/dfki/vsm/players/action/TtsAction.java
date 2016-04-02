@@ -22,9 +22,18 @@ public class TtsAction extends Action implements EventListener{
     private LinkedList<AbstractWord> listWords = new LinkedList<AbstractWord>();
     private final EventDispatcher mEventDispatcher = EventDispatcher.getInstance();
     private final I4GMaryClient mary = I4GMaryClient.instance();
+    private String mGender;
     public TtsAction(){
         mEventDispatcher.register(this);
 
+    }
+
+    public String getGender(){
+        return mGender;
+    }
+
+    public void setGender(String gender){
+        mGender = gender;
     }
 
 
@@ -36,7 +45,14 @@ public class TtsAction extends Action implements EventListener{
     public void run(){
 
         Iterator it = listWords.iterator();
-        VoiceName speakerVoice = I4GMaryClient.OBADIAH;
+        VoiceName speakerVoice = null;
+        if(mGender != null && mGender.equalsIgnoreCase("FEMALE")){
+           speakerVoice  = I4GMaryClient.POPPY;
+        }
+        else{
+            speakerVoice = I4GMaryClient.OBADIAH;
+        }
+        
         while (it.hasNext()) {
             AbstractWord iterAction = (AbstractWord) it.next();
             if (iterAction instanceof SceneWord) {
@@ -47,7 +63,7 @@ public class TtsAction extends Action implements EventListener{
 
         if(phrase.length() > 0) {
             try {
-                mary.speak();
+                mary.speak(speakerVoice);
             } catch (Exception e) {
                 e.printStackTrace();
             }
